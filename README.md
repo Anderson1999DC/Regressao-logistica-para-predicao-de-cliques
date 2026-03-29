@@ -67,7 +67,8 @@ flowchart TD
     D --> E[Avaliação\nConfusion Matrix · Classification Report]
     E --> F([Modelo Final\nAcurácia: 90%])
 
-    B --> B1[/"Dois clusters visíveis\nno pairplot por hue"/]
+    B --> B1[/"Dois clusters visíveis\
+    nno pairplot por hue"/]
     E --> E1[/"Precision: 0.95\nRecall: 0.85 · F1: 0.90"/]
 
     style A fill:#4A90D9,color:#fff,stroke:none
