@@ -113,7 +113,7 @@ flowchart TD
 | `Daily Time Spent on Site` | Tempo diário no site (min) | 65,0 min |
 | `Age` | Idade do usuário | 36,0 anos |
 | `Area Income` | Renda média da região (US$) | US$ 55.000 |
-| `Daily Internet Usage` | Uso diário de internet (min) | — |
+| `Daily Internet Usage` | Uso diário de internet (min) | 180 |
 | `Male` | Gênero (binária: 0/1) | — |
 | `Clicked on Ad` | **Variável alvo** — clicou (1) ou não (0) | — |
 
