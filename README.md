@@ -1,22 +1,17 @@
-<div align="center">
-
 # Regressão Logística para Predição de Cliques em Anúncios
-### EDA · Classificação Binária · Regressão Logística · Marketing Digital
 
-<br>
+### EDA · Classificação · Regressão Logística · ROC-AUC · Marketing Digital
+
+&nbsp;
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.x-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge&logo=python&logoColor=white)](https://seaborn.pydata.org/)
-[![Status](https://img.shields.io/badge/Status-Concluído-28a745?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Concluído-28a745?style=for-the-badge)](https://github.com/Anderson1999DC/Regressao-logistica-para-predicao-de-cliques)
 
-<br>
-
-> Modelo de classificação binária para prever se um usuário irá clicar em um anúncio online,
-> com base em dados comportamentais e demográficos — aplicação direta em estratégias de marketing digital.
-
-</div>
+&nbsp;
+> Modelo de classificação para prever a probabilidade de um usuário clicar em um anúncio online,
+> com base em características comportamentais e demográficas — atingindo ~90% de acurácia.
 
 ---
 
@@ -27,8 +22,8 @@
 - [Pipeline do Projeto](#pipeline-do-projeto)
 - [Tecnologias](#tecnologias-utilizadas)
 - [Dataset](#dataset)
-- [Análise Exploratória](#análise-exploratória)
-- [Modelagem e Resultados](#modelagem-e-resultados)
+- [Etapas Detalhadas](#etapas-detalhadas)
+- [Resultados](#resultados)
 - [Insights de Negócio](#insights-de-negócio)
 - [Estrutura do Repositório](#estrutura-do-repositório)
 - [Autor](#autor)
@@ -37,23 +32,23 @@
 
 ## Contexto
 
-Empresas que investem em **marketing digital** precisam entender quais usuários têm maior probabilidade de interagir com anúncios. Direcionar campanhas sem critério gera desperdício de verba e baixo retorno.
+Projeto de Machine Learning aplicado ao marketing digital, utilizando um dataset fictício de publicidade online. O objetivo é identificar o perfil de usuários com maior probabilidade de interagir com anúncios, permitindo segmentação mais eficiente de campanhas publicitárias.
 
-A partir de dados comportamentais e demográficos de 1.000 usuários, o objetivo é construir um modelo capaz de **prever a probabilidade de clique em anúncios**, permitindo segmentação mais inteligente das campanhas.
-
-| Classe | Descrição |
+| Etapa | Descrição |
 |---|---|
-| `0` | Usuário **não clicou** no anúncio |
-| `1` | Usuário **clicou** no anúncio |
+| **EDA** | Análise de perfil etário, renda regional e padrão de uso da internet |
+| **Modelagem** | Regressão Logística para classificação binária |
+| **Avaliação** | Acurácia, Precision, Recall, F1-Score e ROC-AUC |
+| **Insight** | Identificação do perfil de usuário com maior propensão a clicar |
 
 ---
 
 ## Objetivos
 
-- Explorar padrões comportamentais que diferenciam usuários que clicam ou não em anúncios
-- Identificar as variáveis mais relevantes para a classificação
-- Construir e avaliar um modelo de Regressão Logística para classificação binária
-- Traduzir os resultados em recomendações para estratégias de marketing digital
+- Construir um modelo de classificação para prever cliques em anúncios digitais
+- Identificar variáveis comportamentais e demográficas que mais influenciam a decisão de clique
+- Avaliar o modelo com métricas completas incluindo ROC-AUC e curva ROC
+- Exportar o modelo treinado para deploy via API
 
 ---
 
@@ -61,21 +56,20 @@ A partir de dados comportamentais e demográficos de 1.000 usuários, o objetivo
 
 ```mermaid
 flowchart TD
-    A([advertising.csv\n1.000 usuários · 10 colunas]) --> B[EDA\nHistograma · Jointplots · Pairplot]
-    B --> C[Preparação\nConversão Timestamp · Seleção de features]
-    C --> D[Regressão Logística\nScikit-learn · 70/30 split]
-    D --> E[Avaliação\nConfusion Matrix · Classification Report]
-    E --> F([Modelo Final\nAcurácia: 90%])
-
-    B --> B1[/"Dois clusters visíveis\nno pairplot por hue"/]
-    E --> E1[/"Precision: 0.95\nRecall: 0.85 · F1: 0.90"/]
+    A([Dataset\nPublicidade Digital\n1000 usuários]) --> B[EDA\nIdade · Renda · Tempo Online]
+    B --> C[Preparação\nSeleção de features · Timestamp → datetime]
+    C --> D[Split Treino/Teste\n67% / 33%]
+    D --> E[Regressão Logística\nmax_iter=1000]
+    E --> F[Avaliação\nClassification Report · ROC-AUC]
+    F --> G([Modelo Final\n~90% Acurácia\nROC-AUC alto])
 
     style A fill:#4A90D9,color:#fff,stroke:none
-    style F fill:#28a745,color:#fff,stroke:none
+    style G fill:#28a745,color:#fff,stroke:none
     style B fill:#6C757D,color:#fff,stroke:none
     style C fill:#6C757D,color:#fff,stroke:none
     style D fill:#6C757D,color:#fff,stroke:none
     style E fill:#6C757D,color:#fff,stroke:none
+    style F fill:#6C757D,color:#fff,stroke:none
 ```
 
 ---
@@ -87,99 +81,89 @@ flowchart TD
 | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) | Linguagem principal |
 | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white) | Manipulação e análise dos dados |
 | ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white) | Operações numéricas |
-| ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white) | Histograma de distribuição |
-| ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=flat-square&logo=python&logoColor=white) | Jointplots e pairplot com hue |
-| ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white) | Modelo de Regressão Logística e métricas |
+| ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white) | Modelo, métricas e curva ROC |
+| ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white) | Curva ROC e visualizações |
+| ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=flat-square&logo=python&logoColor=white) | Análise exploratória e pairplot |
 
 ---
 
 ## Dataset
 
-**Fonte:** `advertising.csv` — Dataset fictício de publicidade online
+**Fonte:** Dataset fictício de publicidade digital criado para fins educacionais  
 **Uso:** Exclusivamente educacional
 
 | Característica | Detalhe |
 |---|---|
 | Volume | 1.000 usuários |
-| Colunas totais | 10 |
-| Features usadas no modelo | 5 |
-| Variável alvo | `Clicked on Ad` (0 ou 1) |
-| Classes | Balanceadas (~50% / 50%) |
+| Variável target | `Clicked on Ad` (1 = clicou) |
+| Balanceamento | 50% clicou / 50% não clicou |
 
-**Variáveis do modelo:**
+**Variáveis utilizadas no modelo:**
 
-| Feature | Descrição | Média |
-|---|---|---|
-| `Daily Time Spent on Site` | Tempo diário no site (min) | 65,0 min |
-| `Age` | Idade do usuário | 36,0 anos |
-| `Area Income` | Renda média da região (US$) | US$ 55.000 |
-| `Daily Internet Usage` | Uso diário de internet (min) | 180 |
-| `Male` | Gênero (binária: 0/1) | — |
-| `Clicked on Ad` | **Variável alvo** — clicou (1) ou não (0) | — |
+| Variável | Descrição |
+|---|---|
+| `Daily Time Spent on Site` | Tempo diário no site (min) |
+| `Age` | Idade do usuário |
+| `Area Income` | Renda média da região (USD) |
+| `Daily Internet Usage` | Uso diário de internet (min) |
+| `Male` | Sexo (1 = masculino) |
 
 ---
 
-## Análise Exploratória
+## Etapas Detalhadas
 
-### Visão Geral — Separação por Comportamento de Clique
+**Análise Exploratória de Dados (EDA)**
+- Distribuição etária dos usuários pico entre 25 e 45 anos
+- Relação entre idade e renda regional
+- Relação entre tempo no site e uso diário de internet
+- Pairplot segmentado por `Clicked on Ad` — revela padrões de separação entre as classes
 
-![Pairplot Clicked on Ad](Assets/pairplot_clicked_on_ad.png)
-
-> O pairplot com `hue="Clicked on Ad"` revela **dois clusters bem definidos** — usuários que clicam (vermelho) e os que não clicam (azul) se separam claramente em `Daily Time Spent on Site` e `Daily Internet Usage`. Essa separação visual confirma que o modelo terá base sólida para classificar.
-
----
-
-### Idade × Tempo no Site (KDE)
-
-![KDE Idade x Tempo no Site](Assets/kde_idade_tempo_site.png)
-
-> Usuários **mais velhos e com menos tempo no site** formam o cluster com maior probabilidade de clicar. Já os usuários mais jovens e com alto tempo no site tendem a **não clicar** — possivelmente mais experientes em ignorar anúncios.
+**Preparação dos Dados**
+- Conversão do campo `Timestamp` para formato `datetime`
+- Remoção de colunas de texto sem valor preditivo (`Email`, `City`, `Country`, `Ad Topic Line`)
+- Split treino/teste: **67% / 33%** com `random_state=42`
 
 ---
 
-### Tempo no Site × Uso Diário de Internet
-
-![Jointplot Tempo no Site x Internet](Assets/jointplot_tempo_site_internet.png)
-
-> Dois grupos distintos: usuários com **alto uso de internet e alto tempo no site** raramente clicam; usuários com **baixo uso de internet e menos tempo no site** clicam mais. Padrão consistente com o perfil de um usuário menos habituado ao ambiente digital.
-
----
-
-## Modelagem e Resultados
-
-### Métricas de Avaliação
-
-| Métrica | Classe 0 (não clicou) | Classe 1 (clicou) | Média |
-|---|---|---|---|
-| **Precision** | 0.86 | **0.95** | 0.91 |
-| **Recall** | **0.96** | 0.85 | 0.90 |
-| **F1-score** | 0.91 | 0.90 | 0.90 |
-| **Accuracy** | — | — | **90%** |
+## Resultados
 
 ### Matriz de Confusão
 
-```
-                  Previsto: 0    Previsto: 1
-Real: 0 (não clicou)   155            7
-Real: 1 (clicou)        25          143
-```
+![Matriz de Confusão](assets/confusion_matrix_clique.png)
 
-> O modelo acertou **155 de 162 não-clicadores** (96% de recall) e **143 de 168 clicadores** (85% de recall). Os 25 falsos negativos representam usuários que clicaram mas não foram identificados pelo modelo — erro aceitável para um primeiro modelo de baseline.
+### Curva ROC
+
+![Curva ROC](assets/roc_clique.png)
+
+| Métrica | Valor |
+|---|---|
+| **Acurácia** | **~90%** |
+| **Precision (média)** | alto |
+| **Recall (média)** | alto |
+| **F1-Score (média)** | alto |
+| **ROC-AUC** | alto |
+
+> Bom equilíbrio entre Precision e Recall para ambas as classes o modelo identifica de forma consistente tanto usuários propensos a clicar quanto aqueles que não clicariam.
 
 ---
 
 ## Insights de Negócio
 
-- **Usuários mais velhos com menor uso de internet** têm maior probabilidade de clicar — segmentar campanhas para esse perfil tende a aumentar o CTR
-- **Alto tempo no site e alto uso de internet** são indicadores negativos de clique — usuários digitalmente experientes ignoram mais anúncios
-- O modelo com **90% de acurácia** permite automatizar a segmentação de público-alvo, reduzindo desperdício de verba em campanhas
+**Perfil de usuário com maior probabilidade de clique:**
+- Menor tempo diário no site usuários em busca ativa, não passivos
+- Menor uso diário de internet menos expostos a ruído digital
+- Faixa etária mais elevada
+- Renda regional moderada
 
-### Próximos Passos Sugeridos
+**Aplicações práticas:**
+- Segmentação de audiência para campanhas de anúncios digitais
+- Redução do custo por clique (CPC) ao evitar usuários com baixa propensão
+- Score de propensão integrável em plataformas de ad bidding
+- Base para sistemas de recomendação de conteúdo patrocinado
 
-- Testar outros algoritmos de classificação (Random Forest, XGBoost) para comparação
-- Incluir variáveis de localização (`Country`) via encoding para capturar padrões geográficos
-- Aplicar `max_iter` maior no modelo ou normalização de dados para resolver o aviso de convergência
-- Implementar uma curva ROC-AUC para avaliar o threshold ideal de classificação
+**Limitações do modelo:**
+- Dataset fictício e simplificado em produção, variáveis como histórico de cliques e categoria do anúncio seriam essenciais
+- Avaliado em conjunto de dados único desempenho pode variar em outros contextos
 
 ---
 
@@ -188,15 +172,16 @@ Real: 1 (clicou)        25          143
 ```
 Regressao-logistica-para-predicao-de-cliques/
 │
-├── 📁 Assets/                                      # Gráficos gerados na análise
-│   ├── pairplot_clicked_on_ad.png
-│   ├── kde_idade_tempo_site.png
-│   └── jointplot_tempo_site_internet.png
+├──  assets/                                      # Gráficos gerados na análise
+│   ├── confusion_matrix_clique.png
+│   └── roc_clique.png
 │
-├── 📓 regressao_logistica_predicao_de_clique.ipynb  # Notebook completo
-├── 📄 advertising.csv                               # Dataset
-├── 📄 requirements.txt                              # Dependências do projeto
-└── 📄 README.md                                     # Documentação do projeto
+├──  regressao_logistica_predicao_de_clique.ipynb # Notebook completo
+├──  advertising.csv                              # Dataset original
+├──  modelo_predicao_clique.pkl                   # Modelo treinado
+├──  colunas_clique.pkl                           # Features esperadas pela API
+├──  requirements.txt                             # Dependências do projeto
+└──  README.md                                    # Documentação do projeto
 ```
 
 ---
