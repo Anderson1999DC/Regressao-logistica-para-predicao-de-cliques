@@ -129,11 +129,11 @@ flowchart TD
 
 ### Matriz de Confusão
 
-![Matriz de Confusão](assets/confusion_matrix_clique.png)
+![Matriz de Confusão](Assets/confusion_matrix_clique.png)
 
 ### Curva ROC
 
-![Curva ROC](assets/roc_clique.png)
+![Curva ROC](Assets/roc_clique.png)
 
 | Métrica | Valor |
 |---|---|
