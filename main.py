@@ -31,19 +31,17 @@ def interface():
 
 @app.post("/predict")
 def predict(usuario: Usuario):
-    dados = {
-        "Daily Time Spent on Site": usuario.daily_time_spent_on_site,
-        "Age": usuario.age,
-        "Area Income": usuario.area_income,
-        "Daily Internet Usage": usuario.daily_internet_usage,
-        "Male": usuario.male
-    }
+    # Construindo DataFrame diretamente na ordem correta das colunas
+    df = pd.DataFrame([[
+        usuario.daily_time_spent_on_site,
+        usuario.age,
+        usuario.area_income,
+        usuario.daily_internet_usage,
+        usuario.male
+    ]], columns=colunas)
 
-    df = pd.DataFrame([dados])
-    df_final = df.reindex(columns=colunas, fill_value=0)
-
-    predicao = modelo.predict(df_final)[0]
-    probabilidade = modelo.predict_proba(df_final)[0]
+    predicao = modelo.predict(df)[0]
+    probabilidade = modelo.predict_proba(df)[0]
 
     return {
         "clicou": int(predicao),
