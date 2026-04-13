@@ -1,17 +1,23 @@
 # Regressão Logística para Predição de Cliques em Anúncios
 
-### EDA · Classificação · Regressão Logística · ROC-AUC · Marketing Digital
+### EDA · Classificação · Regressão Logística · ROC-AUC · FastAPI · Docker · Deploy
 
 &nbsp;
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.x-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![Status](https://img.shields.io/badge/Status-Concluído-28a745?style=for-the-badge)](https://github.com/Anderson1999DC/Regressao-logistica-para-predicao-de-cliques)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-deployed-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Status](https://img.shields.io/badge/API-online-28a745?style=for-the-badge)](https://api-predicao-clique.onrender.com)
 
 &nbsp;
 > Modelo de classificação para prever a probabilidade de um usuário clicar em um anúncio online,
-> com base em características comportamentais e demográficas — atingindo ~90% de acurácia.
+> com base em características comportamentais e demográficas atingindo ~90% de acurácia.
+> Deploy em produção com API REST containerizada.
+
+&nbsp;
+
+**[Acessar interface interativa](https://api-predicao-clique.onrender.com/app)** &nbsp;|&nbsp; **[Documentação da API](https://api-predicao-clique.onrender.com/docs)**
 
 ---
 
@@ -22,9 +28,10 @@
 - [Pipeline do Projeto](#pipeline-do-projeto)
 - [Tecnologias](#tecnologias-utilizadas)
 - [Dataset](#dataset)
-- [Etapas Detalhadas](#etapas-detalhadas)
+- [Análise Exploratória](#análise-exploratória)
 - [Resultados](#resultados)
 - [Insights de Negócio](#insights-de-negócio)
+- [API em Produção](#api-em-produção)
 - [Estrutura do Repositório](#estrutura-do-repositório)
 - [Autor](#autor)
 
@@ -32,14 +39,14 @@
 
 ## Contexto
 
-Projeto de Machine Learning aplicado ao marketing digital, utilizando um dataset fictício de publicidade online. O objetivo é identificar o perfil de usuários com maior probabilidade de interagir com anúncios, permitindo segmentação mais eficiente de campanhas publicitárias.
+Projeto de Machine Learning aplicado ao marketing digital, utilizando um dataset fictício de publicidade online. O objetivo é identificar o perfil de usuários com maior probabilidade de interagir com anúncios, permitindo segmentação mais eficiente de campanhas publicitárias. O modelo foi colocado em produção como API REST containerizada.
 
 | Etapa | Descrição |
 |---|---|
 | **EDA** | Análise de perfil etário, renda regional e padrão de uso da internet |
 | **Modelagem** | Regressão Logística para classificação binária |
 | **Avaliação** | Acurácia, Precision, Recall, F1-Score e ROC-AUC |
-| **Insight** | Identificação do perfil de usuário com maior propensão a clicar |
+| **Deploy** | API REST com FastAPI + Docker + Render |
 
 ---
 
@@ -48,7 +55,8 @@ Projeto de Machine Learning aplicado ao marketing digital, utilizando um dataset
 - Construir um modelo de classificação para prever cliques em anúncios digitais
 - Identificar variáveis comportamentais e demográficas que mais influenciam a decisão de clique
 - Avaliar o modelo com métricas completas incluindo ROC-AUC e curva ROC
-- Exportar o modelo treinado para deploy via API
+- Criar uma API REST com FastAPI e containerizar com Docker
+- Fazer deploy em produção com link público acessível
 
 ---
 
@@ -61,15 +69,17 @@ flowchart TD
     C --> D[Split Treino/Teste\n67% / 33%]
     D --> E[Regressão Logística\nmax_iter=1000]
     E --> F[Avaliação\nClassification Report · ROC-AUC]
-    F --> G([Modelo Final\n~90% Acurácia\nROC-AUC alto])
+    F --> G[API REST\nFastAPI · Docker]
+    G --> H([Deploy\nRender · Link público])
 
     style A fill:#4A90D9,color:#fff,stroke:none
-    style G fill:#28a745,color:#fff,stroke:none
+    style H fill:#28a745,color:#fff,stroke:none
     style B fill:#6C757D,color:#fff,stroke:none
     style C fill:#6C757D,color:#fff,stroke:none
     style D fill:#6C757D,color:#fff,stroke:none
     style E fill:#6C757D,color:#fff,stroke:none
     style F fill:#6C757D,color:#fff,stroke:none
+    style G fill:#6C757D,color:#fff,stroke:none
 ```
 
 ---
@@ -84,12 +94,15 @@ flowchart TD
 | ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white) | Modelo, métricas e curva ROC |
 | ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white) | Curva ROC e visualizações |
 | ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=flat-square&logo=python&logoColor=white) | Análise exploratória e pairplot |
+| ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) | API REST para servir o modelo em produção |
+| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Containerização da aplicação |
+| ![Render](https://img.shields.io/badge/Render-46E3B7?style=flat-square&logo=render&logoColor=white) | Hospedagem do deploy em produção |
 
 ---
 
 ## Dataset
 
-**Fonte:** Dataset fictício de publicidade digital criado para fins educacionais  
+**Fonte:** Dataset fictício de publicidade digital criado para fins educacionais
 **Uso:** Exclusivamente educacional
 
 | Característica | Detalhe |
@@ -110,30 +123,23 @@ flowchart TD
 
 ---
 
-## Etapas Detalhadas
-
-**Análise Exploratória de Dados (EDA)**
-- Distribuição etária dos usuários pico entre 25 e 45 anos
-- Relação entre idade e renda regional
-- Relação entre tempo no site e uso diário de internet
-- Pairplot segmentado por `Clicked on Ad` — revela padrões de separação entre as classes
-
-**Preparação dos Dados**
-- Conversão do campo `Timestamp` para formato `datetime`
-- Remoção de colunas de texto sem valor preditivo (`Email`, `City`, `Country`, `Ad Topic Line`)
-- Split treino/teste: **67% / 33%** com `random_state=42`
-
----
-
-## Resultados
+## Análise Exploratória
 
 ### Matriz de Confusão
 
 ![Matriz de Confusão](Assets/confusion_matrix_clique.png)
 
+> Bom equilíbrio entre verdadeiros positivos e negativos o modelo identifica de forma consistente tanto usuários propensos a clicar quanto aqueles que não clicariam.
+
 ### Curva ROC
 
 ![Curva ROC](Assets/roc_clique.png)
+
+> ROC-AUC elevado indica forte capacidade do modelo de separar as duas classes usuários que clicam e usuários que não clicam em anúncios.
+
+---
+
+## Resultados
 
 | Métrica | Valor |
 |---|---|
@@ -162,8 +168,59 @@ flowchart TD
 - Base para sistemas de recomendação de conteúdo patrocinado
 
 **Limitações do modelo:**
-- Dataset fictício e simplificado em produção, variáveis como histórico de cliques e categoria do anúncio seriam essenciais
+- Dataset fictício e simplificado — em produção, variáveis como histórico de cliques e categoria do anúncio seriam essenciais
 - Avaliado em conjunto de dados único desempenho pode variar em outros contextos
+
+---
+
+## API em Produção
+
+### Interface Interativa
+
+[![Interface do Modelo](Assets/interface.png)](https://api-predicao-clique.onrender.com/app)
+
+> Acesse a interface em: **[api-predicao-clique.onrender.com/app](https://api-predicao-clique.onrender.com/app)**
+
+### Documentação Swagger
+
+[![Swagger UI](Assets/Swagger.png)](https://api-predicao-clique.onrender.com/docs)
+
+> Documentação completa da API em: **[api-predicao-clique.onrender.com/docs](https://api-predicao-clique.onrender.com/docs)**
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST https://api-predicao-clique.onrender.com/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "daily_time_spent_on_site": 50.0,
+    "age": 35,
+    "area_income": 55000.0,
+    "daily_internet_usage": 180.0,
+    "male": 0
+  }'
+```
+
+### Resposta
+
+```json
+{
+  "clicou": 1,
+  "resultado": "Alta probabilidade de clique",
+  "probabilidade_clique": 0.8234,
+  "probabilidade_nao_clique": 0.1766,
+  "modelo": "LogisticRegression"
+}
+```
+
+### Endpoints disponíveis
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| `GET` | `/` | Status da API |
+| `GET` | `/app` | Interface interativa |
+| `GET` | `/docs` | Documentação Swagger |
+| `POST` | `/predict` | Predição de clique |
 
 ---
 
@@ -172,16 +229,21 @@ flowchart TD
 ```
 Regressao-logistica-para-predicao-de-cliques/
 │
-├──  assets/                                      # Gráficos gerados na análise
+├──  Assets/                                          # Gráficos e imagens
 │   ├── confusion_matrix_clique.png
-│   └── roc_clique.png
+│   ├── roc_clique.png
+│   ├── interface.png
+│   └── Swagger.png
 │
-├──  regressao_logistica_predicao_de_clique.ipynb # Notebook completo
-├──  advertising.csv                              # Dataset original
-├──  modelo_predicao_clique.pkl                   # Modelo treinado
-├──  colunas_clique.pkl                           # Features esperadas pela API
-├──  requirements.txt                             # Dependências do projeto
-└──  README.md                                    # Documentação do projeto
+├──  regressao_logistica_predicao_de_clique.ipynb    # Notebook completo
+├──  main.py                                          # API FastAPI
+├──  index.html                                       # Interface interativa
+├──  Dockerfile                                       # Containerização
+├──  modelo_predicao_clique.pkl                       # Modelo treinado
+├──  colunas_clique.pkl                               # Features esperadas pela API
+├──  advertising.csv                                  # Dataset original
+├──  requirements.txt                                 # Dependências do projeto
+└──  README.md                                        # Documentação do projeto
 ```
 
 ---
@@ -203,5 +265,3 @@ Regressao-logistica-para-predicao-de-cliques/
 ---
 
 <div align="center">
-
-</div>
