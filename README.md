@@ -168,7 +168,7 @@ flowchart TD
 - Base para sistemas de recomendação de conteúdo patrocinado
 
 **Limitações do modelo:**
-- Dataset fictício e simplificado — em produção, variáveis como histórico de cliques e categoria do anúncio seriam essenciais
+- Dataset fictício e simplificado em produção, variáveis como histórico de cliques e categoria do anúncio seriam essenciais
 - Avaliado em conjunto de dados único desempenho pode variar em outros contextos
 
 ---
